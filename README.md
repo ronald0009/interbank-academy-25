@@ -1,66 +1,65 @@
-# Reto Técnico: Procesamiento de Transacciones Bancarias (CLI)
+# Reto Técnico: Procesamiento de Transacciones Bancarias (CLI) - Ronald Alarcon
 
-## Objetivo:
+## Introducción
 
-Desarrolla una aplicación de línea de comandos (CLI) que procese un archivo CSV con transacciones bancarias y genere un reporte que incluya:
+Este proyecto tiene como objetivo desarrollar una herramienta de línea de comandos (CLI) en Python para procesar un archivo CSV con transacciones financieras. El programa calcula el saldo final de una cuenta, identifica la transacción de mayor valor (solo créditos) y clasifica las transacciones en créditos y débitos.
 
-- **Balance Final:**  
-  Suma de los montos de las transacciones de tipo "Crédito" menos la suma de los montos de las transacciones de tipo "Débito".
+El reto consiste en manejar adecuadamente los datos de transacciones, aplicar la lógica financiera adecuada, y proporcionar un reporte claro y útil para el usuario.
 
-- **Transacción de Mayor Monto:**  
-  Identificar el ID y el monto de la transacción con el valor más alto.
+## Instrucciones de Ejecución
 
-- **Conteo de Transacciones:**  
-  Número total de transacciones para cada tipo ("Crédito" y "Débito").
+### Requisitos
+Este proyecto está basado en Python. Asegúrate de tener Python instalado en tu sistema. Puedes verificarlo con el siguiente comando:
 
----
+```bash
+python --version
+```
 
-## Instrucciones
+### Instalación de Dependencias
 
-1. **Repositorio Base:**  
-   Clona o haz un fork del repositorio base disponible en:  
-   `https://github.com/codeableorg/interbank-academy-25`
+Este proyecto no tiene dependencias externas más allá de las bibliotecas estándar de Python (`csv`, `argparse`, `unicodedata`). Por lo tanto, no es necesario instalar ningún paquete adicional.
 
-2. **Entrada de Datos:**  
-   La aplicación deberá leer un archivo CSV. Ejemplo de contenido:
+### Ejecución del Programa
 
-   ```
-   id,tipo,monto
-   1,Crédito,100.00
-   2,Débito,50.00
-   3,Crédito,200.00
-   4,Débito,75.00
-   5,Crédito,150.00
-   ```
+1. Clona el repositorio a tu máquina local:
+    ```bash
+    git clone <URL_DEL_REPOSITORIO>
+    cd <NOMBRE_DEL_DIRECTORIO>
+    ```
 
-3. **Salida del Programa:**  
-   La aplicación debe mostrar el reporte final en la terminal.  
-   Ejemplo de salida:
+2. Ejecuta el script pasando el archivo CSV con las transacciones como argumento. El archivo debe tener los encabezados `id`, `tipo` y `monto`.
 
-   ```
-   Reporte de Transacciones
-   ---------------------------------------------
-   Balance Final: 325.00
-   Transacción de Mayor Monto: ID 3 - 200.00
-   Conteo de Transacciones: Crédito: 3 Débito: 2
-   ```
+    ```bash
+    python procesar_transacciones.py ruta_al_archivo.csv
+    ```
 
-4. **Lenguaje de Programación:**  
-   Utiliza el lenguaje de tu preferencia. Opciones recomendadas:
+3. El programa mostrará el saldo final, la transacción con el mayor monto (solo créditos), y el total de créditos y débitos.
 
-   - Python
-   - Java
-   - C#
-   - JavaScript (Node.js)
+## Enfoque y Solución
 
-5. **README del Proyecto:**  
-   Incluye un archivo `README.md` con la siguiente estructura:
+La solución implementada se basa en procesar un archivo CSV de transacciones financieras. Los pasos principales son:
 
-   - **Introducción:** Breve descripción del reto y su propósito.
-   - **Instrucciones de Ejecución:** Cómo instalar dependencias y ejecutar la aplicación.
-   - **Enfoque y Solución:** Lógica implementada y decisiones de diseño.
-   - **Estructura del Proyecto:** Archivos y carpetas principales.
+1. **Leer el archivo CSV**: Se utiliza `csv.DictReader` para leer el archivo y convertir cada fila en un diccionario.
+2. **Procesar las transacciones**:
+   - Se identifican las transacciones de tipo **"credito"** y **"debito"**.
+   - Se calculan el saldo final sumando los créditos y restando los débitos.
+   - Se busca la transacción con el mayor monto, considerando solo los créditos.
+3. **Salida del programa**: Al final, se muestra el saldo final, la transacción con el monto más alto y los totales de créditos y débitos.
 
-6. **Documentación y Calidad del Código:**
-   - Código bien documentado y fácil de leer.
-   - Comentarios explicando pasos clave y lógica del programa.
+### Decisiones de Diseño:
+- Se decidió ignorar las transacciones de tipo **débitos** al buscar la transacción con el mayor monto, ya que se asumió que el máximo se refiera solo a créditos.
+- Se incluyó un paso para **eliminar acentos** en los valores de las transacciones para garantizar una comparación insensible a acentos y tildes, particularmente en idiomas como el español.
+  
+## Estructura del Proyecto
+
+El proyecto tiene la siguiente estructura de archivos y carpetas:
+
+```
+/procesar_transacciones.py      # Script principal que procesa el archivo CSV y genera el reporte
+README.md                      # Este archivo con las instrucciones y detalles del proyecto
+```
+
+### Descripción de los Archivos:
+
+- **`procesar_transacciones.py`**: El script que contiene la lógica para procesar el archivo CSV y generar el reporte de transacciones.
+- **`README.md`**: Documento con la descripción del proyecto, instrucciones de ejecución, enfoque y solución.
